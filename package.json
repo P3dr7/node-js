@@ -1,0 +1,20 @@
+{
+  "name": "node2",
+  "version": "1.0.0",
+  "description": "",
+  "type":"module",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node --watch --no-warnings ./src/server.js"
+  },
+  "author": "Pedro Ferri",
+  "license": "ISC",
+  "dependencies": {
+    "fastify": "^4.24.3",
+    "mysql2": "^3.6.2"
+  },
+  "devDependencies": {
+    "dotenv": "^16.3.1"
+  }
+}
