@@ -1,25 +1,13 @@
-import { fastify } from "fastify";
-import { DatabaseSQL } from "./controller/hospital";
+import * as hospitalController from "./routes/hospital.js";
+import paciente from "./routes/paciente.js";
 
-const server = fastify();
-const database = new DatabaseSQL();
+export default function (fastify, options, done) {
+	// Registrar rotas individualmente
+	fastify.post("/hospital", hospitalController.createHospital);
+	fastify.get("/hospital", hospitalController.listHospitals);
+	fastify.delete("/hospital/:id", hospitalController.deleteHospital);
 
-server.post("/person", async (request, reply) => {
-	const { name, adress, alergia } = request.body;
-	await database.create({
-		name,
-		adress,
-		alergia,
-	});
-	return reply.status(201).send();
-});
+	paciente(fastify);
 
-server.get("/hospital", () => {
-	const GEThospital = database.list();
-
-	return GEThospital;
-});
-
-server.listen({
-	port: 3333,
-});
+	done();
+}

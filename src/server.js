@@ -1,29 +1,20 @@
-import { DatabaseSQL } from './controller/hospital.js';
 import fastify from 'fastify';
+import routes from './routes.js';
 
-const database = new DatabaseSQL();
-const server = new fastify();
+const server = fastify({ logger: true });
 
-server.post("/hospital", async (request, reply) => {
-	const { name, adress } = request.body;
-	await database.create({
-		name,
-		adress,
-	});
-	return reply.status(201).send();
-});
+// Registrar rotas
+server.register(routes);
 
-server.get("/hospital", async (request) => {
-	const search = request.query.search;
+// Iniciar o servidor
+const start = async () => {
+    try {
+        await server.listen({port: 3333})
+        server.log.info(`Servidor rodando na porta ${server.server.address().port}`);
+    } catch (err) {
+        server.log.error(err);
+        process.exit(1);
+    }
+}
 
-	const GEThospital = await database.list(search);
-
-	return GEThospital;
-});
-
-server.listen({ port: 3333 }, (err) => {
-	if (err) {
-	  fastify.log.error(err)
-	  process.exit(1)
-	}
-});
+start();
