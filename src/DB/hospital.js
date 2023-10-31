@@ -1,4 +1,4 @@
-import { randomUUID }from 'node:crypto';
+import { GenerateID } from '../config/ID.js';
 import { connection } from './db.js';
 
 export class DatabaseSQL {
@@ -17,13 +17,7 @@ export class DatabaseSQL {
 	}
 
 	async create(infos) {
-		// Limpa o UUID deixando apenas numeros
-		const hospitalID = randomUUID().replace(/\D/g, '');
-		let strNumber = String(hospitalID);
-        if (strNumber.length > 18) {
-            strNumber = strNumber.substring(0, 18);
-        }
-        let hospitalIDtrated = parseInt(strNumber, 10);
+		const hospitalIDtrated = GenerateID();
 		// Puxa os dados passado pelo post
 		const {name, adress} = infos;
 		// insere no banco de dados
