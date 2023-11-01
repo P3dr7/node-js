@@ -49,3 +49,18 @@ export async function checkHospitalExists(nomeHospital) {
     }
     return null;
 }
+
+export async function checkFarmacialExists(nomeFarmacia) {
+    // Consulta para verificar a existência da farmacia pelo nome
+    const result = await connection.query(
+        "SELECT ID_Farmacia FROM farmacia WHERE Nome_Farmacia = ?",
+        [nomeFarmacia]
+    );
+    // console.log('Resultado da consulta:', result);
+    // Verifica se o array tem pelo menos 1 elemento, depois verifica se o primeiro elemento tem pelo menos 1 elementro dentro dele
+    if (result && result.length > 0 && result[0].length > 0) {
+        const ID_Farmacia = result[0][0].ID_Farmacia;
+        return ID_Farmacia;
+    }
+    return null;
+}

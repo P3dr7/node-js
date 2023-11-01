@@ -6,7 +6,7 @@ export class DatabaseSQL {
         
 		let presc;
 		if (search) {
-			const sql = 'SELECT * FROM receitas WHERE Nome_Hospital LIKE ?';
+			const sql = 'SELECT * FROM receitas WHERE Nome_receita LIKE ?';
 			presc = connection.query(sql, `%${search}%`);
 		} else {
 			[presc] = await connection.query('SELECT * FROM receitas');

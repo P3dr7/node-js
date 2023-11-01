@@ -19,12 +19,12 @@ export class DatabaseSQL {
 	async create(infos) {
 		const DoctorUUIDtrated = GenerateID();
 		// Puxa os dados passado pelo post
-		const {name, crm, horario} = infos;
-		// console.log(hospProximo)
+		const {name, crm, horario, hospital} = infos;
+	
 		// insere no banco de dados
-        const sql = 'INSERT INTO medicos (Id_Medico, Nome_Medico, CRM_Medico, Horario_Plantao) VALUES (?, ?, ?, TIME(?))';
-        const values = [DoctorUUIDtrated, name, crm, horario];
-		//console.log(hospitalID);
+        const sql = 'INSERT INTO medicos (Id_Medico, Nome_Medico, CRM_Medico, Hospital, Horario_Plantao) VALUES (?, ?, ?, ?,TIME(?))';
+        const values = [DoctorUUIDtrated, name, crm, hospital, horario];
+
 		// Aqui executa a inserção 
 		try {
 			await connection.query(sql, values);

@@ -3,6 +3,8 @@ import paciente from "./Controller/paciente.js";
 import * as PharmacyController from "./Controller/farmacia.js";
 import * as DoctorController from "./Controller/medicos.js";
 import * as RecController from "./Controller/receitas.js";
+import * as RemController from "./Controller/remedios.js";
+import * as HorPacController from "./Controller/paciente_horario.js";
 
 export default function (fastify, options, done) {
 	// Registrar rotas individualmente
@@ -23,6 +25,16 @@ export default function (fastify, options, done) {
 	fastify.post("/receitas", RecController.createRec);
 	fastify.get("/receitas", RecController.listRec);
 	fastify.delete("/receitas/:id", RecController.deleteRec);
+
+
+	fastify.post("/remedios", RemController.createFarm);
+	fastify.get("/remedios", RemController.listFarm);
+	fastify.delete("/remedios/:id", RemController.deleteFarm);
+
+	fastify.post("/horarioPaciente", HorPacController.createHPac);
+	fastify.get("/horarioPaciente", HorPacController.listHPac);
+	fastify.delete("/horarioPaciente/:id", HorPacController.deleteHPac);
+
 
 	done();
 }
