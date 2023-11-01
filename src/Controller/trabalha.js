@@ -7,7 +7,8 @@ export async function createTrab(request, reply) {
     try {
         const { medico, hospital } = request.body;
         const DoctorId = await checkMedicoExists(medico);
-        const HospId = await checkHospitalExists(hospital);
+        const HospInfo = await checkHospitalExists(hospital);
+        const HospId = HospInfo ? HospInfo.id : null;
         if (!DoctorId) {
             return reply.status(400).send({ error: "Doutor não encontrado!" });
         }

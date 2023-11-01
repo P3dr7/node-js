@@ -21,11 +21,11 @@ export class DatabaseSQL {
 		const FarmaciaUUIDtrated = GenerateID();
 		// Puxa os dados passado pelo post
 		const {name, adress} = infos;
-		// console.log(hospProximo)
+	
 		// insere no banco de dados
         const sql = 'INSERT INTO farmacia (Id_Farmacia, Nome_Farmacia, Endereco_Farmacia) VALUES (?, ?, ?)';
         const values = [FarmaciaUUIDtrated, name, adress];
-		//console.log(hospitalID);
+
 		// Aqui executa a inserção 
 		try {
 			await connection.query(sql, values);

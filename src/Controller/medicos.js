@@ -5,8 +5,8 @@ const database = new DatabaseSQL();
 
 export const createDoctor = async (request, reply) => {
     const { name, crm, horario, nomeHosp } = request.body;
-    const hospId = await checkHospitalExists(nomeHosp);
-
+    const hospInfo = await checkHospitalExists(nomeHosp);
+    const hospId = hospInfo ? hospInfo.id : null;
     if (!hospId) {
         return reply.status(400).send({ error: "Hospital não encontrado!" });
     }

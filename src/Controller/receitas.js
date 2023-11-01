@@ -1,5 +1,5 @@
 import { DatabaseSQL } from "../DB/receitas.js";
-import { connection } from "../DB/db.js";
+
 import { checkMedicoExists,checkPacienteExists } from "../config/Verifica.js"
 const database = new DatabaseSQL();
 

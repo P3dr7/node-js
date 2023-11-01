@@ -9,8 +9,7 @@ export async function checkMedicoExists(nameDoc) {
 	// Verifica se o array tem pelo menos 1 elemento, depois verifica se o primeiro elemento tem pelo menos 1 elementro dentro dele
 	if (resultDoc && resultDoc.length > 0 && resultDoc[0].length > 0) {
 		const idDoctor = resultDoc[0][0].ID_Medico;
-		
-		console.log(idDoctor)
+
         return idDoctor;
 	}
 	return null;
@@ -23,7 +22,7 @@ export async function checkPacienteExists(namePac) {
 		"SELECT ID_Paciente FROM paciente WHERE Nome_Paciente = ?",
 		[namePac]
 	);
-	// console.log('Resultado da consulta:', result);
+
 	// Verifica se o array tem pelo menos 1 elemento, depois verifica se o primeiro elemento tem pelo menos 1 elementro dentro dele
 	
 		if (resultPac && resultPac.length > 0 && resultPac[0].length > 0) {
@@ -35,32 +34,35 @@ export async function checkPacienteExists(namePac) {
 
 export async function checkHospitalExists(nomeHospital) {
     // Consulta para verificar a existência do hospital pelo nome
-    // console.log('Verificando hospital:', nomeHospital);
     const result = await connection.query(
-        "SELECT ID_Hospital FROM hospital WHERE Nome_Hospital = ?",
+        "SELECT Id_Hospital, Endereco_Hospital FROM hospital WHERE Nome_Hospital = ?",
         [nomeHospital]
     );
-    // console.log('Resultado da consulta:', result);
     // Verifica se o array tem pelo menos 1 elemento, depois verifica se o primeiro elemento tem pelo menos 1 elementro dentro dele
     if (result && result.length > 0 && result[0].length > 0) {
-        const idHospital = result[0][0].ID_Hospital;
-        // console.log('ID do Hospital:', idHospital);
-        return idHospital;
+        const hospitalInfo = {
+            id: result[0][0].Id_Hospital,
+            endereco: result[0][0].Endereco_Hospital,
+        };
+        return hospitalInfo;
     }
     return null;
 }
 
 export async function checkFarmacialExists(nomeFarmacia) {
-    // Consulta para verificar a existência da farmacia pelo nome
+    // Consulta para verificar a existência da farmacia pelo nome e obter o endereço
     const result = await connection.query(
-        "SELECT ID_Farmacia FROM farmacia WHERE Nome_Farmacia = ?",
+        "SELECT ID_Farmacia, Endereco_Farmacia FROM farmacia WHERE Nome_Farmacia = ?",
         [nomeFarmacia]
     );
-    // console.log('Resultado da consulta:', result);
     // Verifica se o array tem pelo menos 1 elemento, depois verifica se o primeiro elemento tem pelo menos 1 elementro dentro dele
     if (result && result.length > 0 && result[0].length > 0) {
-        const ID_Farmacia = result[0][0].ID_Farmacia;
-        return ID_Farmacia;
+        const farmaciaInfo = {
+            id: result[0][0].ID_Farmacia,
+            endereco: result[0][0].Endereco_Farmacia,
+        };
+
+        return farmaciaInfo;
     }
     return null;
 }

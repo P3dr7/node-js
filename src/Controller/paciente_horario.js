@@ -8,7 +8,7 @@ export const createHPac = async (request, reply) => {
 
 	// Verifica a existência do hospital e obtém o ID correspondente
 	const PacId = await checkPacienteExists(nomePac);
-    // console.log(PacId)
+
 	if (!PacId) {
 		return reply.status(400).send({ error: "Paciente não encontrado!" });
         

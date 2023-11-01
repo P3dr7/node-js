@@ -7,7 +7,8 @@ export const createFarm = async (request, reply) => {
 	const { name, qntEst, nomeFarmacia } = request.body;
 
 	// Verifica a existência do hospital e obtém o ID correspondente
-	const FarmID = await checkFarmacialExists(nomeFarmacia);
+	const FarmInfo = await checkFarmacialExists(nomeFarmacia);
+	const FarmID = FarmInfo ? FarmInfo.id : null;
 	if (!FarmID) {
 		return reply.status(400).send({ error: "Farmacia não encontrado!" });
 	}

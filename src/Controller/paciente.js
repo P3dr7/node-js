@@ -9,7 +9,9 @@ export default async function (fastify) {
 		const { name, adress, alergia, nomeHospital } = request.body;
 
 		// Verifica a existência do hospital e obtém o ID correspondente
-		const hospitalID = await checkHospitalExists(nomeHospital);
+		const hospitalinfo = await checkHospitalExists(nomeHospital);
+		const hospitalID = hospitalinfo ? hospitalinfo.id : null;
+	
 		if (!hospitalID) {
 			return reply.status(400).send({ error: "Hospital não encontrado!" });
 		}

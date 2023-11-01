@@ -20,11 +20,11 @@ export class DatabaseSQL {
 		const PacienteUUIDtrated = GenerateID();
 		// Puxa os dados passado pelo post
 		const {name, adress, alergia,hospitalID,hospProximo} = infos;
-		// console.log(hospProximo)
+
 		// insere no banco de dados
         const sql = 'INSERT INTO paciente (Id_Paciente, Nome_Paciente, Endereco_paciente, Alergia_Remedio, fk_Hospital_Id_Hospital, Hospital_Proximo) VALUES (?, ?, ?, ?, ?, ?)';
         const values = [PacienteUUIDtrated, name, adress, alergia, hospitalID, hospProximo];
-		//console.log(hospitalID);
+
 		// Aqui executa a inserção 
 		try {
 			await connection.query(sql, values);

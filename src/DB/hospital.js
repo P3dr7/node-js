@@ -23,7 +23,7 @@ export class DatabaseSQL {
 		// insere no banco de dados
         const sql = 'INSERT INTO hospital (ID_Hospital, Nome_Hospital, Endereco_Hospital) VALUES (?, ?, ?)';
         const values = [hospitalIDtrated, name, adress];
-		//console.log(hospitalID);
+
 		// Aqui executa a inserção 
 		try {
 			await connection.query(sql, values);
