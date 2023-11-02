@@ -3,9 +3,9 @@ import { connection } from './db.js';
 export class DatabaseSQL {
 	
 	async create(infos) {
-		const { idFarmacia, idRemedio } = infos;
-        const sql = 'INSERT INTO estoquefarmacia (fk_Farmacia_Id_Farmacia, fk_Remedios_Id_Remedio) VALUES (?, ?)';
-        const values = [idFarmacia, idRemedio];
+		const { idFarmacia, idHospital } = infos;
+        const sql = 'INSERT INTO tem (fk_Hospital_Id_Hospital, fk_Farmacia_Id_Farmacia) VALUES (?, ?)';
+        const values = [idHospital, idFarmacia];
 		try {
 			await connection.query(sql, values);
 		} catch (error) {

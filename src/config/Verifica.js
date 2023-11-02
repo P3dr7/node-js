@@ -66,3 +66,59 @@ export async function checkFarmacialExists(nomeFarmacia) {
     }
     return null;
 }
+export async function checkRemedioExists(namePac) {
+	// Consulta para verificar a existência do Paciente pelo nome
+	
+	const resultRem = await connection.query(
+		"SELECT Id_Remedio FROM remedios WHERE Nome_Remedio = ?",
+		[namePac]
+	);
+
+	// Verifica se o array tem pelo menos 1 elemento, depois verifica se o primeiro elemento tem pelo menos 1 elementro dentro dele
+	
+		if (resultRem && resultRem.length > 0 && resultRem[0].length > 0) {
+            const idRem = resultRem[0][0].Id_Remedio;
+            return idRem;
+        }
+	return null;
+}
+
+export async function checkRemedioRepeat(infos) {
+    const { nameRem, farmaciaId } = infos;
+
+
+    const existingRemedio = await connection.query(
+        "SELECT * FROM remedios WHERE Nome_Remedio = ? AND fk_Farmacia_Id_Farmacia = ?",
+        [nameRem, farmaciaId]
+    );
+ 
+
+    if (existingRemedio[0] && existingRemedio[0].length > 0) {
+        return false;
+    }
+
+    return true;
+}
+
+export async function checkEnderecoFH() {
+    try {
+      const [existFarmInHosp] = await connection.query(
+        "SELECT farmacia.Id_Farmacia, hospital.Id_Hospital FROM farmacia JOIN hospital ON farmacia.Endereco_Farmacia = hospital.Endereco_Hospital;"
+      );
+      console.log(existFarmInHosp);
+      if (existFarmInHosp && existFarmInHosp.length > 0) {
+        return existFarmInHosp;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+    return null;
+  }
+
+  export async function existeNaTabelaTem(idFarmacia, idHospital) {
+    const resultado = await connection.query(
+        "SELECT * FROM tem WHERE fk_Farmacia_Id_Farmacia = ? AND fk_Hospital_Id_Hospital = ?",
+        [idFarmacia, idHospital]
+    );
+    return resultado && resultado.length > 0;
+}

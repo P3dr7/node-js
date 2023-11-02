@@ -27,9 +27,9 @@ export default function (fastify, options, done) {
 	fastify.delete("/receitas/:id", RecController.deleteRec);
 
 
-	fastify.post("/remedios", RemController.createFarm);
-	fastify.get("/remedios", RemController.listFarm);
-	fastify.delete("/remedios/:id", RemController.deleteFarm);
+	fastify.post("/remedios", RemController.createRem);
+	fastify.get("/remedios", RemController.listRem);
+	fastify.delete("/remedios/:id", RemController.deleteRem);
 
 	fastify.post("/horarioPaciente", HorPacController.createHPac);
 	fastify.get("/horarioPaciente", HorPacController.listHPac);
